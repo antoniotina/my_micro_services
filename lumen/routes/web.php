@@ -23,5 +23,25 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('register', 'AuthController@register');
 
     // Matches "/api/login
-    $router->post('login', 'AuthController@login');
+    $router->post('login', 'AuthController@authenticate');
+});
+
+$router->group(['middleware' => 'jwt.auth'], function() use ($router) {
+
+    // get all users, test for token middleware
+    $router->get('users', 'UserController@index');
+
+    // message routes
+    // create message 
+    $router->post('message', 'MessageController@store');
+    // get message by id
+    $router->get('message/{id}', 'MessageController@get');
+    // update message by id
+    $router->put('message/{id}', 'MessageController@edit');
+    // destroy message by id
+    $router->delete('message/{id}', 'MessageController@destroy');
+
+    // get all messages from a discussion
+    $router->get('discussion/{id}', 'MessageController@getMessagesByDiscussion');
+    
 });
