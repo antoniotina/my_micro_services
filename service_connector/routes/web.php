@@ -72,7 +72,7 @@ $router->get('/discussion/{id}', function (Request $request) use ($router) {
 $router->get('/find', function (Request $request) use ($router) {
     return  Http::get('http://localhost:3100/find', [
         'id' => $request->id,
-        ]);
+    ]);
 });
 
 $router->post('/create', function (Request $request) use ($router) {

@@ -22,13 +22,14 @@ module.exports = {
         return reponse;
     },
     updateDiscussion: ({id, users}) => {
-        Discussion.findById(id)
+        return Discussion.findById(id)
         .then((discussion) => {
             discussion.users = users;
-            return discussion.save();
+            discussion.save();
+            return 'Discussion correctly updated'
         })
-        .catch(err => err)
-        console.log('update disscusion');
+        .catch(err =>  { return 'id not found' })
+        // console.log('update disscusion');
     },
     deleteDiscussion: (id) => {
         let reponse = Discussion.findByIdAndRemove(id)
